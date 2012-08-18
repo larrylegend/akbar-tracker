@@ -40,7 +40,7 @@ class LocationsController < ApplicationController
   # POST /locations
   # POST /locations.json
   def create
-    @location = Location.new(params[:location])
+    @location = Location.new(:lat => params[:lat], :lng => params[:lng])
 
     respond_to do |format|
       if @location.save
@@ -59,7 +59,7 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:id])
 
     respond_to do |format|
-      if @location.update_attributes(params[:location])
+      if @location.update_attributes(:lat => params[:lat], :lng => params[:lng])
         format.html { redirect_to @location, notice: 'Location was successfully updated.' }
         format.json { head :no_content }
       else
